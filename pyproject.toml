@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=45", "wheel", "setuptools-scm>=6.2"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -12,7 +12,6 @@ authors = [
 ]
 license = {text = "MIT"}
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -31,11 +30,11 @@ dependencies = [
 wshcopy = "wsh.wshcopy:cli"
 
 [project.urls]
-Homepage = "https://github.com/isontheline/webssh.sh"
+Homepage = "https://github.com/tobiashochguertel/webssh.sh"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["wsh*"]
+[tool.setuptools]
+packages = ["wsh"]
+license-files = ["LICENSE"]
 
 [tool.black]
 line-length = 100
