@@ -1,4 +1,8 @@
 # webssh.sh
+
+[![Tests](https://github.com/tobiashochguertel/webssh.sh/actions/workflows/test.yml/badge.svg)](https://github.com/tobiashochguertel/webssh.sh/actions/workflows/test.yml)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+
 Shell Helpers about WebSSH
 
 ## Installation
