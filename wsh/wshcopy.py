@@ -19,17 +19,22 @@ try:
 except ImportError:
     from importlib_metadata import version
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-t", "--terminal",
-                    help="Force terminal type instead of auto detection", default="auto")
-parser.add_argument("-v", "--version",
-                    help="Show version of wshcopy", action="store_true")
-args = parser.parse_args()
-
-terminal = args.terminal
+# Global variable for terminal type (will be set by cli())
+terminal = "auto"
 
 
 def cli():
+    global terminal
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--terminal",
+                        help="Force terminal type instead of auto detection", default="auto")
+    parser.add_argument("-v", "--version",
+                        help="Show version of wshcopy", action="store_true")
+    args = parser.parse_args()
+    
+    terminal = args.terminal
+    
     # If "version" arg is set, print version and exit :
     if args.version:
         pkg_version = version("webssh-sh")

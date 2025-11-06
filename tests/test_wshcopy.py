@@ -125,22 +125,23 @@ class TestCLI:
     def test_cli_with_input(self, capsys):
         """Test CLI with text input"""
         test_input = "Hello World\n"
-        wshcopy.args = MagicMock(version=False)
-        wshcopy.terminal = "auto"
+        test_args = ['-t', 'auto']
         
         with patch('sys.stdin', StringIO(test_input)):
             with patch.dict(os.environ, {}, clear=True):
-                wshcopy.cli()
+                with patch('sys.argv', ['wshcopy'] + test_args):
+                    wshcopy.cli()
         
         captured = capsys.readouterr()
         assert "\x1b]52;c;" in captured.out
     
     def test_cli_version(self, capsys):
         """Test CLI version flag"""
-        wshcopy.args = MagicMock(version=True)
+        test_args = ['--version']
         
-        with pytest.raises(SystemExit) as exc_info:
-            wshcopy.cli()
+        with patch('sys.argv', ['wshcopy'] + test_args):
+            with pytest.raises(SystemExit) as exc_info:
+                wshcopy.cli()
         
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
@@ -149,10 +150,11 @@ class TestCLI:
     def test_cli_empty_input(self):
         """Test CLI with empty input"""
         test_input = ""
-        wshcopy.args = MagicMock(version=False)
+        test_args = []
         
         with patch('sys.stdin', StringIO(test_input)):
-            with pytest.raises(SystemExit) as exc_info:
-                wshcopy.cli()
+            with patch('sys.argv', ['wshcopy'] + test_args):
+                with pytest.raises(SystemExit) as exc_info:
+                    wshcopy.cli()
         
         assert exc_info.value.code == 0
