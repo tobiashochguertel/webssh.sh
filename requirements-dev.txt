@@ -1,0 +1,6 @@
+pytest>=7.0
+pytest-cov>=4.0
+pytest-mock>=3.10
+tox>=4.0
+nox>=2023.4.22
+importlib-metadata>=1.0; python_version<"3.8"

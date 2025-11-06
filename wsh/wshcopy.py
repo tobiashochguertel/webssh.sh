@@ -13,7 +13,11 @@ import os
 import sys
 import base64
 import argparse
-import pkg_resources
+
+try:
+    from importlib.metadata import version
+except ImportError:
+    from importlib_metadata import version
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-t", "--terminal",
@@ -28,8 +32,8 @@ terminal = args.terminal
 def cli():
     # If "version" arg is set, print version and exit :
     if args.version:
-        version = pkg_resources.require("webssh-sh")[0].version
-        print("webssh-sh %s" % version)
+        pkg_version = version("webssh-sh")
+        print("webssh-sh %s" % pkg_version)
         exit(0)
     input_content = read_stdin()
     if input_content == "":
