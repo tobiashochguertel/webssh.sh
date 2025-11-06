@@ -61,7 +61,11 @@ def read_stdin():
 
 def write_osc52_sequence(input_content):
     write_osc52_sequence_start()
-    input_content_bytes = input_content.encode("utf-8")
+    try:
+        input_content_bytes = input_content.encode("utf-8")
+    except UnicodeEncodeError:
+        # Handle encoding errors by using surrogateescape error handler
+        input_content_bytes = input_content.encode("utf-8", errors="surrogateescape")
     base64_bytes = base64.b64encode(input_content_bytes)
     base64_string = base64_bytes.decode("utf-8")
     if is_screen():
