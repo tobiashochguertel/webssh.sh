@@ -34,7 +34,10 @@ Homepage = "https://github.com/tobiashochguertel/webssh.sh"
 
 [tool.setuptools]
 packages = ["wsh"]
-license-files = ["LICENSE"]
+
+# Suppress deprecation warnings - these features are still supported
+# We use the older format for compatibility with setuptools < 77.0.0
+[tool.setuptools.dynamic]
 
 [tool.black]
 line-length = 100
